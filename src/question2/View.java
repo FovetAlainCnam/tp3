@@ -1,9 +1,11 @@
 package question2;
 
 import javax.swing.*;
+import java.util.Observable;
+import java.util.Observer;
 
 
-public class View  {
+public class View implements Observer {
     private JTextField jTextField;
     private JButton jButton1;
     private JButton jButton2;
@@ -39,5 +41,25 @@ public class View  {
         window.setVisible(true);
 
         number.addObserver(this);
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        if(observable instanceof Number) {
+            Number number = (Number) observable;
+            this.jTextField.setText(String.valueOf(number.getValue()));
+        }
+    }
+
+    public JTextField getjTextField() {
+        return jTextField;
+    }
+
+    public JButton getjButton1() {
+        return jButton1;
+    }
+
+    public JButton getjButton2() {
+        return jButton2;
     }
 }
